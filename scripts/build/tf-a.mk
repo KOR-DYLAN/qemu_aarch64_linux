@@ -1,5 +1,5 @@
 TF_A_PLAT=qemu
-TF_A_DEBUG=0
+TF_A_DEBUG=1
 ifeq ($(TF_A_DEBUG),0)
 TF_A_BUILD_TYPE=release
 else

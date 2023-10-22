@@ -14,10 +14,15 @@ ROOTFS		:=$(BDIR)/images/rootfs.ext4
 BOOTARGS	:="rootwait root=/dev/vda console=ttyAMA0"
 QFLAG		:=-netdev user,id=eth0 -device virtio-net-device,netdev=eth0
 QFLAG		+=-drive file=$(ROOTFS),if=none,format=raw,id=hd0 -device virtio-blk-device,drive=hd0
-QFLAG		+=-no-acpi -d unimp -semihosting-config enable=on
+QFLAG		+=-d unimp -semihosting-config enable=on
+
+DEBUG_IMG	:=bl2.bin
 
 run: $(IMG) $(ROOTFS)
-	$(QEMU) -M $(MACHIN),gic-version=$(GIC),virtualization=$(VIRT),secure=$(SECURE) -cpu $(CPU) -smp $(SMP) -m $(RAM) -bios $(BIOS) -kernel $(IMG) -append $(BOOTARGS) $(QFLAG) -nographic
+	$(QEMU) -M $(MACHIN),gic-version=$(GIC),virtualization=$(VIRT),secure=$(SECURE),acpi=off -cpu $(CPU) -smp $(SMP) -m $(RAM) -bios $(BIOS) -kernel $(IMG) -append $(BOOTARGS) $(QFLAG) -nographic
+
+debug: $(DEBUG_IMG) $(ROOTFS)
+	$(QEMU) -M $(MACHIN),gic-version=$(GIC),virtualization=$(VIRT),secure=$(SECURE),acpi=off -cpu $(CPU) -smp $(SMP) -m $(RAM) -bios $(BIOS) -kernel $(DEBUG_IMG) -append $(BOOTARGS) $(QFLAG) -nographic -S -s
 
 extract_fdt:
 	$(QEMU) -M $(MACHIN) -cpu $(CPU) -smp $(SMP) -m $(RAM) $(QFLAG) -machine dumpdtb=$(FDT)
