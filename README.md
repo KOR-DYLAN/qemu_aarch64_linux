@@ -90,7 +90,7 @@
     output at 'qemu_aarch64_linux/build/linux'
     ```
 
-## Step 6. Build Linux Kernel
+## Step 6. Build Buildroot( Root File System )
 ### Step 6-1. Configuration
 - **Run the script below**
     ```
