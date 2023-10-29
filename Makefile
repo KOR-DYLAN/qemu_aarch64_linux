@@ -7,6 +7,8 @@ NPROC			:=$(shell nproc)
 TOOLCHAIN		:=$(TOPDIR)/aarch64-none-linux-gnu
 CROSS_COMPILE	:=$(TOOLCHAIN)/bin/aarch64-none-linux-gnu-
 ARCH			:=arm64
+OD				:=$(CROSS_COMPILE)objdump
+OC				:=$(CROSS_COMPILE)objcopy
 
 # Qemu
 QSRC			:=$(TOPDIR)/qemu
