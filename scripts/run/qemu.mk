@@ -11,7 +11,7 @@ IMG			:=$(KDIR)/arch/arm64/boot/Image
 FDT_NAME	:=qemu-system-aarch64
 FDT			:=$(KDIR)/arch/arm64/boot/dts/qemu/$(FDT_NAME).dtb
 ROOTFS		:=$(BDIR)/images/rootfs.ext4
-BOOTARGS	:="rootwait root=/dev/vda console=ttyAMA0"
+BOOTARGS	:="rootwait root=/dev/vda console=ttyAMA0 earlycon loglevel=8 kgdboc=ttyAMA0"
 QFLAG		:=-netdev user,id=eth0 -device virtio-net-device,netdev=eth0
 QFLAG		+=-drive file=$(ROOTFS),if=none,format=raw,id=hd0 -device virtio-blk-device,drive=hd0
 QFLAG		+=-d unimp -semihosting-config enable=on
