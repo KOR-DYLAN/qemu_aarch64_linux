@@ -403,7 +403,7 @@ ASFLAGS			+=	$(CPPFLAGS) $(ASFLAGS_$(ARCH))			\
 TF_CFLAGS		+=	$(CPPFLAGS) $(TF_CFLAGS_$(ARCH))		\
 				-ffunction-sections -fdata-sections		\
 				-ffreestanding -fno-builtin -fno-common		\
-				-Os -std=gnu99
+				-O${OPTIMIZE_LEVEL} -std=gnu99
 
 $(eval $(call add_define,SVE_VECTOR_LEN))
 
@@ -428,7 +428,7 @@ TF_LDFLAGS		+=	$(TF_LDFLAGS_$(ARCH))
 # LD = gcc (used when GCC LTO is enabled)
 else ifneq ($(findstring gcc,$(notdir $(LD))),)
 # Pass ld options with Wl or Xlinker switches
-TF_LDFLAGS		+=	-Wl,--fatal-warnings -O1
+TF_LDFLAGS		+=	-Wl,--fatal-warnings -O${OPTIMIZE_LEVEL}
 TF_LDFLAGS		+=	-Wl,--gc-sections
 ifeq ($(ENABLE_LTO),1)
 	ifeq (${ARCH},aarch64)
@@ -448,7 +448,7 @@ else
 # With ld.bfd version 2.39 and newer new warnings are added. Skip those since we
 # are not loaded by a elf loader.
 TF_LDFLAGS		+=	$(call ld_option, --no-warn-rwx-segments)
-TF_LDFLAGS		+=	-O1
+TF_LDFLAGS		+=	-O${OPTIMIZE_LEVEL}
 TF_LDFLAGS		+=	--gc-sections
 # ld.lld doesn't recognize the errata flags,
 # therefore don't add those in that case.

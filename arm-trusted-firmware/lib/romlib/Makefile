@@ -31,7 +31,7 @@ else
   Q :=
 endif
 
-LDFLAGS := --gc-sections -O1
+LDFLAGS := --gc-sections -O${OPTIMIZE_LEVEL}
 ifeq ($(DEBUG),1)
    LDFLAGS += -Map=$(MAPFILE)
 endif

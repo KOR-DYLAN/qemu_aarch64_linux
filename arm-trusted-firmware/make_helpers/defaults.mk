@@ -490,3 +490,10 @@ DRTM_SUPPORT			:= 0
 # Check platform if cache management operations should be performed.
 # Disabled by default.
 CONDITIONAL_CMO			:= 0
+
+# Optimize Level
+ifeq (${DEBUG},1)
+OPTIMIZE_LEVEL	:=0
+else
+OPTIMIZE_LEVEL	:=2
+endif
