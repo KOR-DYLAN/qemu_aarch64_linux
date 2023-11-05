@@ -36,6 +36,7 @@ include scripts/build/buildroot.mk
 
 # execute scripts
 include scripts/run/qemu.mk
+include scripts/run/nfs.mk
 
 all:
 
